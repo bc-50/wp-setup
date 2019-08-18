@@ -6,6 +6,7 @@ var copydir = require("copy-dir");
 var ncp = require("ncp").ncp;
 var rimraf = require("rimraf");
 const _cliProgress = require("cli-progress");
+const simpleGit = require('simple-git');
 var wpUrl = "https://wordpress.org/latest.zip";
 var siteUrl = path
   .dirname(__filename)
@@ -63,17 +64,14 @@ function copytemplate() {
     fs.mkdirSync(dir);
   }
 
-  copydir("C:\\Users\\User\\Documents\\Templates\\theme-folder", dir, function (
-    err
-  ) {
-    if (err) {
-      console.error(err);
-    } else {
-      /* console.log(" Theme File Created"); */
+
+  simpleGit().clone('https://github.com/bc-50/wp-setup', dir)
+  .then(function (){
       bar1.update(250);
       writeToStyles(dir);
-    }
   });
+
+  
 }
 
 function writeToStyles(dir) {
