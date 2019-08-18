@@ -66,7 +66,7 @@ function copytemplate() {
 
 
   simpleGit().clone('https://github.com/bc-50/wp-setup', dir)
-  .then(function (){
+  .exec(function (){
       bar1.update(250);
       writeToStyles(dir);
   });
