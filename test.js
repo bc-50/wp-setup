@@ -23,10 +23,10 @@ bar1.start(300, 0, {
   speed: 500
 });
 https
-  .get(wpUrl, function(response) {
+  .get(wpUrl, function (response) {
     response.pipe(fs.createWriteStream(__dirname + "/wp.zip"));
   })
-  .on("close", function() {
+  .on("close", function () {
     /* console.log(" Wordpress Zip Downloaded"); */
     bar1.update(50);
     fs.createReadStream(__dirname + "/wp.zip")
@@ -35,10 +35,10 @@ https
           path: __dirname
         })
       )
-      .on("close", function() {
+      .on("close", function () {
         /* console.log(" Files Extracted"); */
         bar1.update(100);
-        ncp(__dirname + "/wordpress", __dirname, function(err) {
+        ncp(__dirname + "/wordpress", __dirname, function (err) {
           if (err) {
             return console.error(err);
           }
@@ -66,7 +66,7 @@ function copytemplate() {
 
   simpleGit()
     .clone("https://github.com/bc-50/theme-folder", dir)
-    .exec(function() {
+    .exec(function () {
       bar1.update(250);
       writeToStyles(dir);
     });
@@ -82,7 +82,7 @@ function writeToStyles(dir) {
     @import url("../brace-` +
     siteUrl +
     `-theme/styles/main.min.css");`;
-  fs.writeFile(dir + "/style.css", temp, function(err) {
+  fs.writeFile(dir + "/style.css", temp, function (err) {
     if (err) {
       return console.log(err);
     }
@@ -94,14 +94,15 @@ function writeToStyles(dir) {
     config();
   });
 }
+
 function config() {
-  fs.readFile(__dirname + "wp-config-sample.php", "utf8", function(err, data) {
+  fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
     if (err) {
       return console.log(err);
     }
     var result = data.replace(/database_name_here/g, "siteUrl");
 
-    fs.writeFile(__dirname + "wp-config-sample.php", result, "utf8", function(
+    fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
       err
     ) {
       if (err) return console.log(err);
