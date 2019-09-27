@@ -8,10 +8,23 @@ var rimraf = require("rimraf");
 const _cliProgress = require("cli-progress");
 const simpleGit = require("simple-git");
 var wpUrl = "https://wordpress.org/latest.zip";
+const rp = require('request-promise');
+const url = 'https://api.wordpress.org/secret-key/1.1/salt/';
 var siteUrl = path
   .dirname(__filename)
   .split(path.sep)
   .pop();
+
+const salts = `
+  define( 'AUTH_KEY',         'put your unique phrase here' );
+  define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+  define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+  define( 'NONCE_KEY',        'put your unique phrase here' );
+  define( 'AUTH_SALT',        'put your unique phrase here' );
+  define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+  define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+  define( 'NONCE_SALT',       'put your unique phrase here' ); 
+  `;
 
 const bar1 = new _cliProgress.SingleBar({
   format: "Site Template Progress |" + "{bar}" + "| {percentage}%",
@@ -100,7 +113,7 @@ function config() {
     if (err) {
       return console.log(err);
     }
-    var result = data.replace(/database_name_here/g, "siteUrl");
+    var result = data.replace(/database_name_here/g, siteUrl);
 
     fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
       err
@@ -108,6 +121,58 @@ function config() {
       if (err) return console.log(err);
     });
   });
+
+
+  fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    var result = data.replace(/username_here/g, "root");
+
+    fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
+      err
+    ) {
+      if (err) return console.log(err);
+    });
+  });
+
+
+  fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    var result = data.replace(/password_here/g, "it_begins");
+
+    fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
+      err
+    ) {
+      if (err) return console.log(err);
+    });
+  });
+
+  var count = 0;
+
+
+  rp(url)
+    .then(function (html) {
+      fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
+        if (err) {
+          return console.log(err);
+        }
+        var result = data.replace(salts, html);
+
+        fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
+          err
+        ) {
+          if (err) return console.log(err);
+        });
+      });
+
+    })
+    .catch(function (err) {
+      //handle error
+    });
+
 }
 
 function deletepackages() {
