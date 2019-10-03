@@ -113,7 +113,7 @@ function config() {
     if (err) {
       return console.log(err);
     }
-    var result = data.replace(/database_name_here/g, siteUrl);
+    var result = data.replace(salts, url);
 
     fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
       err
@@ -121,57 +121,6 @@ function config() {
       if (err) return console.log(err);
     });
   });
-
-
-  fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    var result = data.replace(/username_here/g, "root");
-
-    fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
-      err
-    ) {
-      if (err) return console.log(err);
-    });
-  });
-
-
-  fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    var result = data.replace(/password_here/g, "it_begins");
-
-    fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
-      err
-    ) {
-      if (err) return console.log(err);
-    });
-  });
-
-  var count = 0;
-
-
-  rp(url)
-    .then(function (html) {
-      fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
-        if (err) {
-          return console.log(err);
-        }
-        var result = data.replace(salts, html);
-
-        fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
-          err
-        ) {
-          if (err) return console.log(err);
-        });
-      });
-
-    })
-    .catch(function (err) {
-      //handle error
-    });
 
 }
 
