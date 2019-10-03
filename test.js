@@ -16,7 +16,6 @@ var siteUrl = path
   .pop();
 var config = require('./config-data');
 
-module.exports.useURL = siteUrl;
 
 https
   .get(wpUrl, function (response) {
@@ -103,7 +102,12 @@ function config() {
         }
 
         for (let i = 0; i < 3; i++) {
-          result = result.replace(config.standard[i], config.rows[i]);
+          if (i == 0) {
+            result = result.replace(config.standard[i], siteUrl);
+
+          } else {
+            result = result.replace(config.standard[i], config.rows[i]);
+          }
         }
 
         fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
