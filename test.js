@@ -94,7 +94,7 @@ function rewrite() {
   rp(url)
     .then(function (html) {
       var rows = html.split('\n');
-      fs.readFile(__dirname + "/wp-config-sample.php", "utf8", function (err, data) {
+      fs.readFile(__dirname + "/wp-config.php", "utf8", function (err, data) {
         if (err) {
           return console.log(err);
         }
@@ -116,7 +116,7 @@ function rewrite() {
           }
         }
 
-        fs.writeFile(__dirname + "/wp-config-sample.php", result, "utf8", function (
+        fs.writeFile(__dirname + "/wp-config.php", result, "utf8", function (
           err
         ) {
           if (err) return console.log(err);
