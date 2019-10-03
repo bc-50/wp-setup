@@ -35,7 +35,7 @@ https
           if (err) {
             return console.error(err);
           }
-          console.log("Content pulled from Wordpress Folder");
+          console.log(" Content pulled from Wordpress Folder");
           deletefiles();
           copytemplate();
         });
@@ -103,7 +103,7 @@ function rewrite() {
 
         for (let i = 0; i < 3; i++) {
           if (i == 0) {
-            result = result.replace(config.standard[i], siteUrl);
+            result = result.replace(config.standard[i], siteUrl.replace("-", "_"));
 
           } else {
             result = result.replace(config.standard[i], config.rows[i]);
