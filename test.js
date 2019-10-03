@@ -10,12 +10,13 @@ const simpleGit = require("simple-git");
 var wpUrl = "https://wordpress.org/latest.zip";
 const rp = require('request-promise');
 const url = 'https://api.wordpress.org/secret-key/1.1/salt/';
-module.exports.siteUrl = path
+var siteUrl = path
   .dirname(__filename)
   .split(path.sep)
   .pop();
 var config = require('./config-data');
 
+module.exports.useURL = siteUrl;
 
 https
   .get(wpUrl, function (response) {

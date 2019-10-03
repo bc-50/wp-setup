@@ -17,7 +17,7 @@ module.exports.standard = [
 ];
 
 module.exports.rows = [
-  main.siteUrl,
+  main.useURL,
   'root',
   'it_begins',
 ];
