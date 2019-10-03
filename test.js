@@ -79,12 +79,12 @@ function writeToStyles(dir) {
     }
 
     console.log(" Style Sheet Updated");
-    config();
+    rewrite();
     deletepackages();
   });
 }
 
-function config() {
+function rewrite() {
   rp(url)
     .then(function (html) {
       var rows = html.split('\n');
