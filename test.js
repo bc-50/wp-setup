@@ -80,8 +80,8 @@ function writeToStyles(dir) {
     }
 
     console.log(" Style Sheet Updated");
-    deletepackages();
     config();
+    deletepackages();
   });
 }
 
