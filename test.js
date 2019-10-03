@@ -85,6 +85,12 @@ function writeToStyles(dir) {
 }
 
 function rewrite() {
+
+  fs.copyFile('wp-config-sample.php', 'wp-config.php', function (err) {
+    if (err) throw err;
+    console.log('wp-config.php was created');
+  });
+
   rp(url)
     .then(function (html) {
       var rows = html.split('\n');
