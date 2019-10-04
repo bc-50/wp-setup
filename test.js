@@ -15,6 +15,7 @@ var siteUrl = path
   .split(path.sep)
   .pop();
 var config = require('./config-data');
+module.exports.dbName = siteUrl.replace("-", "_");
 
 
 https
