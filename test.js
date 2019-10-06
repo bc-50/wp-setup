@@ -15,6 +15,7 @@ var siteUrl = path
   .split(path.sep)
   .pop();
 var config = require('./config-data');
+var database = require('./database');
 module.exports.dbName = siteUrl.replace("-", "_");
 
 
@@ -82,6 +83,7 @@ function writeToStyles(dir) {
     console.log(" Style Sheet Updated");
     rewrite();
     deletepackages();
+    database.database();
   });
 }
 

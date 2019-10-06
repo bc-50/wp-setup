@@ -1,3 +1,5 @@
+
+module.exports.database = function () {
 var mysql = require('mysql');
 var name = require('./test')
 var clust = mysql.createPoolCluster()
@@ -140,7 +142,7 @@ clust.getConnection('database', (err, connection) => {
   connection.query('');
   connection.release();
 });
-
+}
 // con.connect(function (err) {
 //   if (err) throw err;
 //   console.log("Connected!");
