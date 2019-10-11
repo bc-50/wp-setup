@@ -1,0 +1,28 @@
+{
+  "name": "exxperiment",
+  "version": "1.0.0",
+  "description": "Wordpress Automation",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DarkDestroyer",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "cli-progress": "^3.0.0",
+    "copy-dir": "^1.1.0",
+    "extract-zip": "^1.6.7",
+    "fs-extra": "^8.1.0",
+    "mysql": "^2.17.1",
+    "ncp": "^2.0.0",
+    "progress": "^2.0.3",
+    "puppeteer": "^1.20.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "rimraf": "^3.0.0",
+    "simple-git": "^1.124.0",
+    "unzip": "^0.1.11",
+    "unzipper": "^0.10.3"
+  }
+}
