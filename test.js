@@ -83,7 +83,7 @@ function writeToStyles(dir) {
     console.log(" Style Sheet Updated");
     rewrite();
     database.database();
-    deletepackages();
+    /* deletepackages(); */
   });
 }
 
