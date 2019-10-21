@@ -3,12 +3,12 @@
 module.exports.database =
   function database() {
     var mysql = require("mysql");
-    var dbName = require("./test").dbName;
     var con = mysql.createConnection({
       host: "localhost",
       user: "root",
       password: "it_begins"
     });
+    var dbName = require("./test").dbName;
 
     con.connect(function (err) {
       if (err) throw err;
@@ -36,10 +36,14 @@ module.exports.database =
           var sql = "CREATE DATABASE " + rename + " COLLATE latin1_swedish_ci";
           con.query(sql, function (err, result) {
             if (err) throw err;
+          }).on("end", function (err) {
+            con.end()
           });
         }
       });
     }
+
+
   };
 
 function Ranpostfix() {
