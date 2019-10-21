@@ -13,7 +13,7 @@ var siteUrl = path
   .split(path.sep)
   .pop();
 var config = require("./config-data");
-/* var database = require("./database"); */
+var database = require("./database");
 module.exports.dbName = siteUrl.replace("-", "_");
 
 https
@@ -71,8 +71,8 @@ function writeToStyles(dir) {
     if (err) {
       return console.log(err);
     }
+    database.database();
     rewrite();
-    /* database.database(); */
     /* deletepackages(); */
   });
 }
@@ -100,7 +100,7 @@ function rewrite() {
         if (i == 0) {
           result = result.replace(
             config.standard[i],
-            siteUrl.replace("-", "_")
+            database.dbName
           );
         } else {
           result = result.replace(config.standard[i], config.rows[i]);

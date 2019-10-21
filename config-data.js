@@ -1,4 +1,3 @@
-var main = require('./test');
 module.exports.replace = [
   'define( \'AUTH_KEY\',         \'put your unique phrase here\' )\;',
   'define( \'SECURE_AUTH_KEY\',  \'put your unique phrase here\' )\;',
@@ -17,7 +16,7 @@ module.exports.standard = [
 ];
 
 module.exports.rows = [
-  main.useURL,
+  null,
   'root',
   'it_begins',
 ];
