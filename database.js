@@ -14,36 +14,33 @@ module.exports.database =
       if (err) throw err;
     });
 
-    function get_info(name, callback) {
-      var show = "SHOW DATABASES LIKE '" + name + "'";
-      con.query(show, function (err, result) {
-        if (err) throw err;
-        return callback(name, result);
-      });
-    }
+    create_database(dbName);
 
-    var doesExist;
-    doAgain(dbName);
-
-    function doAgain(theName) {
-      get_info(theName, function (rename, result) {
-        doesExist = result;
-        if (doesExist.length != 0) {
-          rename = rename + "_" + Ranpostfix;
-          doAgain(rename);
+    function create_database(theName) {
+      check_for_database(theName, function (rename, result) {
+        if (result.length != 0) {
+          rename = rename + "_" + Ranpostfix();
+          create_database(rename);
         } else {
           module.exports.dbName = rename;
           var sql = "CREATE DATABASE " + rename + " COLLATE latin1_swedish_ci";
           con.query(sql, function (err, result) {
             if (err) throw err;
           }).on("end", function (err) {
-            con.end()
+            if (err) throw err;
+            con.end();
           });
         }
       });
     }
 
-
+    function check_for_database(name, callback) {
+      var show = "SHOW DATABASES LIKE '" + name + "'";
+      con.query(show, function (err, result) {
+        if (err) throw err;
+        return callback(name, result);
+      });
+    }
   };
 
 function Ranpostfix() {
