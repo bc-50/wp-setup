@@ -73,7 +73,7 @@ function writeToStyles(dir) {
     }
     database.database();
     rewrite();
-    /* deletepackages(); */
+    deletepackages();
   });
 }
 
