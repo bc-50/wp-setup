@@ -14,7 +14,7 @@ var siteUrl = path
   .pop();
 var config = require("./config-data");
 var database = require("./database");
-module.exports.dbName = siteUrl.replace("-", "_");
+module.exports.dbName = siteUrl.replace(/-/g, "_");
 
 https
   .get(wpUrl, function (response) {
