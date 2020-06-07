@@ -5,8 +5,8 @@ module.exports.database =
     var mysql = require("mysql");
     var con = mysql.createConnection({
       host: "localhost",
-      user: "root",
-      password: "it_begins"
+      user: "connection_user",
+      password: "connection_password"
     });
     var dbName = require("./test").dbName;
 
