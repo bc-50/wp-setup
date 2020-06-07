@@ -21,6 +21,7 @@ https
     response.pipe(fs.createWriteStream(__dirname + "/wp.zip"));
   })
   .on("close", function () {
+    console.log("Extracting Wordpress zip");
     fs.createReadStream(__dirname + "/wp.zip")
       .pipe(
         unzip.Extract({
@@ -28,6 +29,7 @@ https
         })
       )
       .on("close", function () {
+        console.log("Moving files to current folder");
         ncp(__dirname + "/wordpress", __dirname, function (err) {
           if (err) {
             return console.error(err);
@@ -39,17 +41,18 @@ https
   });
 
 function deletefiles() {
+  console.log("Deleting Wordpress zip and Wordpress folder");
   fs.unlinkSync(__dirname + "/wp.zip");
   rimraf.sync(__dirname + "/wordpress");
 }
 
 function copytemplate() {
+  console.log("Creating Theme Folder");
   var dir = __dirname + "/wp-content/themes/brace-" + siteUrl + "-theme";
-
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
-
+  console.log("Cloning theme to theme folder");
   simpleGit()
     .clone("https://github.com/bc-50/theme-folder", dir)
     .exec(function () {
@@ -58,6 +61,7 @@ function copytemplate() {
 }
 
 function writeToStyles(dir) {
+  console.log("Editing style.css header");
   var temp =
     `/*
     Theme Name: Brace Custom Theme
@@ -71,13 +75,19 @@ function writeToStyles(dir) {
     if (err) {
       return console.log(err);
     }
+    console.log("Creating database");
     database.database();
     rewrite();
     deletepackages();
+    console.log("Now make a sick website!!");
+    console.log("Or don't");
+    console.log("I don't care");
   });
 }
 
 function rewrite() {
+
+  console.log("Creating wp-config");
   fs.copyFile("wp-config-sample.php", "wp-config.php", function (err) {
     if (err) throw err;
   });
@@ -88,6 +98,7 @@ function rewrite() {
       if (err) {
         return console.log(err);
       }
+      console.log("Adding wordpress salts");
       for (let i = 0; i < 8; i++) {
         if (i == 0) {
           var result = data.replace(config.replace[i], rows[i]);
@@ -95,7 +106,7 @@ function rewrite() {
           result = result.replace(config.replace[i], rows[i]);
         }
       }
-
+      console.log("Adding database settings");
       for (let i = 0; i < 3; i++) {
         if (i == 0) {
           result = result.replace(
@@ -115,6 +126,7 @@ function rewrite() {
 }
 
 function deletepackages() {
+  console.log("Deleting startup files");
   if (fs.existsSync(__dirname + "/package.json")) {
     fs.unlinkSync(__dirname + "/package.json");
   }
