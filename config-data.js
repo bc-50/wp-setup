@@ -17,6 +17,6 @@ module.exports.standard = [
 
 module.exports.rows = [
   null,
-  'root',
-  'it_begins',
+  'database_user',
+  'database_password',
 ];
