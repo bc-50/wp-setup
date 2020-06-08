@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+  function request() {
+    var data = {
+      weblog_title: "replace_title",
+      user_name: "replace_user",
+      admin_password: "replace_password",
+      admin_password2: "replace_password",
+      admin_email: "replace_email",
+      blog_public: 0,
+    };
+    var url =
+      "http://localhost/replace_site/wp-admin/install.php?step=2";
+    $.ajax({
+      type: "POST",
+      dataType: "html",
+      url: url,
+      data: data,
+      success: function (data) {
+        console.log("Success");
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(
+          jqXHR.getAllResponseHeaders() +
+          " :: " +
+          textStatus +
+          " :: " +
+          errorThrown
+        );
+      },
+    });
+  }
+</script>
+<noscript>Your browser does not support JavaScript!</noscript>
+
+<body>
+  <h1>Hey Working</h1>
+</body>
+
+</html>
