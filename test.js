@@ -56,8 +56,23 @@ function copytemplate() {
   simpleGit()
     .clone("https://github.com/bc-50/theme-folder", dir)
     .exec(function () {
+      deletethemes();
       writeToStyles(dir);
     });
+}
+
+function deletethemes() {
+  console.log("Deleting Wordpress Themes");
+  var dir = __dirname + "/wp-content/themes/",
+    theme = "brace-" + siteUrl + "-theme";
+
+  fs.readdir(dir, (err, files) => {
+    files.forEach(file => {
+      if (fs.lstatSync(path.resolve(dir, file)).isDirectory() && file != theme) {
+        rimraf.sync(dir + file);
+      }
+    });
+  });
 }
 
 function writeToStyles(dir) {
