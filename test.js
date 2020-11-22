@@ -54,7 +54,7 @@ function copytemplate() {
   }
   console.log("Cloning theme to theme folder");
   simpleGit()
-    .clone("https://github.com/bc-50/theme-folder", dir)
+    .clone("replace_theme", dir)
     .exec(function () {
       deletethemes();
       writeToStyles(dir);
