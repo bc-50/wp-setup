@@ -148,9 +148,17 @@ function deletepackages() {
   if (fs.existsSync(__dirname + "/package-lock.json")) {
     fs.unlinkSync(__dirname + "/package-lock.json");
   }
-
-  fs.unlinkSync(__dirname + "/config-data.js");
-  fs.unlinkSync(__dirname + "/database.js");
-  fs.unlinkSync(__dirname + "/test.js");
+  if (fs.existsSync(__dirname + "/config-data.js")) {
+    fs.unlinkSync(__dirname + "/config-data.js");
+  }
+  if (fs.existsSync(__dirname + "/database.js")) {
+    fs.unlinkSync(__dirname + "/database.js");
+  }
+  if (fs.existsSync(__dirname + "/npm-shrinkwrap.json")) {
+    fs.unlinkSync(__dirname + "/npm-shrinkwrap.json");
+  }
+  if (fs.existsSync(__dirname + "/test.js")) {
+    fs.unlinkSync(__dirname + "/test.js");
+  }
   rimraf.sync(__dirname + "/node_modules");
 }
