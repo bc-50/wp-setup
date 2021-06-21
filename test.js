@@ -1,6 +1,6 @@
 var https = require("https");
 var fs = require("fs");
-var unzip = require("unzip");
+var unzipper = require("unzipper");
 var ncp = require("ncp").ncp;
 var rimraf = require("rimraf");
 var path = require("path");
@@ -15,7 +15,6 @@ var siteUrl = path
 var config = require("./config-data");
 var database = require("./database");
 module.exports.dbName = siteUrl.replace(/-/g, "_");
-
 https
   .get(wpUrl, function (response) {
     response.pipe(fs.createWriteStream(__dirname + "/wp.zip"));
@@ -24,9 +23,7 @@ https
     console.log("Extracting Wordpress zip");
     fs.createReadStream(__dirname + "/wp.zip")
       .pipe(
-        unzip.Extract({
-          path: __dirname
-        })
+        unzipper.Extract({ path: __dirname })
       )
       .on("close", function () {
         console.log("Moving files to current folder");

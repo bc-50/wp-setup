@@ -23,7 +23,6 @@
     "request-promise": "^4.2.5",
     "rimraf": "^3.0.2",
     "simple-git": "^1.132.0",
-    "unzip": "^0.1.11",
     "unzipper": "^0.10.11"
   }
 }
