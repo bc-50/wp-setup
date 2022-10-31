@@ -45,7 +45,7 @@ function deletefiles() {
 
 function copytemplate() {
   console.log("Creating Theme Folder");
-  var dir = __dirname + "/wp-content/themes/brace-" + siteUrl + "-theme";
+  var dir = __dirname + "/wp-content/themes/" + siteUrl + "-theme";
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
@@ -61,7 +61,7 @@ function copytemplate() {
 function deletethemes() {
   console.log("Deleting Wordpress Themes");
   var dir = __dirname + "/wp-content/themes/",
-    theme = "brace-" + siteUrl + "-theme";
+    theme = siteUrl + "-theme";
 
   fs.readdir(dir, (err, files) => {
     files.forEach(file => {
@@ -76,11 +76,11 @@ function writeToStyles(dir) {
   console.log("Editing style.css header");
   var temp =
     `/*
-    Theme Name: Brace Custom Theme
-    Author: Brace Creative Agency
+    Theme Name: Custom Theme
+    Author: Custom Author
     Description: Custom theme
     */
-    @import url("../brace-` +
+    @import url("../` +
     siteUrl +
     `-theme/styles/main.min.css");`;
   fs.writeFile(dir + "/style.css", temp, function (err) {
