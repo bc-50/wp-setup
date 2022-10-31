@@ -8,7 +8,7 @@ module.exports.database =
       user: "connection_user",
       password: "connection_password"
     });
-    var dbName = require("./test").dbName;
+    var dbName = require("./start").dbName;
 
     con.connect(function (err) {
       if (err) throw err;

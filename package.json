@@ -2,7 +2,7 @@
   "name": "exxperiment",
   "version": "1.0.0",
   "description": "Wordpress Automation",
-  "main": "test.js",
+  "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

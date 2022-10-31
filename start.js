@@ -154,8 +154,8 @@ function deletepackages() {
   if (fs.existsSync(__dirname + "/npm-shrinkwrap.json")) {
     fs.unlinkSync(__dirname + "/npm-shrinkwrap.json");
   }
-  if (fs.existsSync(__dirname + "/test.js")) {
-    fs.unlinkSync(__dirname + "/test.js");
+  if (fs.existsSync(__dirname + "/start.js")) {
+    fs.unlinkSync(__dirname + "/start.js");
   }
   rimraf.sync(__dirname + "/node_modules");
 }
